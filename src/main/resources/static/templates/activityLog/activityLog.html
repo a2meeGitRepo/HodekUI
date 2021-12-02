@@ -1,0 +1,208 @@
+	<script src="js/jquery.table2excel.js"></script>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> Activity Log</h4>
+						 <!--  <ol class="breadcrumb float-right">
+                                  		<li class="breadcrumb-item active"><button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light" id="tooltip-touch" title="Add New Packing Box" ng-click="add()">Add New </button></li>
+                         </ol>
+                                -->   
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+		<!-- Add New Packing Box Start-->		
+
+			<div class="row top" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Generate Activity Log:</h4>
+
+									<form >
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Log By: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='Activity'">
+												<label class="control-form"> Activity: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='Date'">
+												<label class="control-form"> Date:  <span
+														style="color:red;">*</span></label>
+											</div>
+												<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='User'">
+												<label class="control-form"> User:  <span
+														style="color:red;">*</span></label>
+											</div>
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3">
+												<select class="form-control f_left" ng-model="log.logBy"  ng-change="callUsers(log.logBy)">
+													<option value="" disabled selected>Select Log Type</option>
+													<option value="Activity" >Activity</option>
+													<option value="Date" >Date</option>
+													<option value="User" >User</option>
+													<option value="Shift" >Shift</option>
+													
+												</select>
+												<span ng-show="logByErr" style="color:red"> * Log Type is  Mandatory</span>
+												
+											</div>
+											<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='Activity'">
+													<select class="form-control f_left" ng-model="log.activity" >
+													<option value="" disabled selected>Select Log Type</option>
+													<option value="QR Generated" >QR Generated</option>
+													<option value="QR Printed" >QR Printed</option>
+													<option value="QR RePrinted" >QR RePrinted</option>
+													
+												</select>
+													<span ng-show="activityErr" style="color:red"> * Activity is  Mandatory</span>
+											</div>
+												<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='Shift'">
+													<select class="form-control f_left" ng-model="log.shift" >
+													<option value="" disabled selected>Select Shift</option>
+													<option value="Shift 1" >Shift 1</option>
+													<option value="Shift 2" >Shift 2</option>
+													<option value="Shift 3" >Shift 3</option>
+													
+												</select>
+													<span ng-show="shiftErr" style="color:red"> * Shift is  Mandatory</span>
+											</div>
+											<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='Date'">
+												<input type="date" ng-model="log.date"  class="f_left form-control" >
+												<span ng-show="dateErr" style="color:red"> * Date is  Mandatory</span>
+													
+											</div>
+											<div class="col-sm-3 col-xs-3" ng-show="log.logBy=='User'" >
+											   <select class="form-control"
+																			ng-model="log.userId" id="user"
+																			ng-options="user.id as user.firstName+' '+user.lastName for user in users"
+																			style="height: calc(2.25rem + 14px)" >
+																			<option value="" disabled selected>Select User</option>
+																		</select>
+											<span ng-show="userErr" style="color:red"> * User is  Mandatory</span>
+											</div>
+											
+										</div>
+								
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3">
+												<button
+													class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-click="cancelAdd()"> Cancel </button>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" 
+													ng-click="generate(log)">
+													Generate </button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box End-->
+
+
+			<div class="row" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+							
+								<div class="card-box table-responsive">
+								<button class="btn btn-primary pull-right"  style="margin-bottom: 10px;"title="View "
+														onClick="exportTableToExcelPackingBox()" ><i class="mdi mdi-printer"></i></button>
+									<table   id="table2excel" class="table table-bordered"  datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<td>#</td>
+												<td> Activity</td>
+												<td> Activity Done By</td>
+												<td>Shift</td>
+												<td> Activity Date</td>
+												<td> Transaction No</td>
+												<td> QR Code</td>
+												
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="arr in activities.datas track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.activity}} </td>
+												<td> {{arr.userName}} </td>
+												<td> {{arr.activityInShift}} </td>
+												<td> {{arr.activityDateTime|date:'dd-MM-yyyy'}} </td>
+												<td> {{arr.packingNo}} </td>
+												<td> {{arr.qrCode}} </td>
+												
+											
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</div>
+<script>
+
+
+
+function exportTableToExcelPackingBox(){
+	 $("#table2excel").table2excel({
+		
+		     // exclude CSS class
+		  exclude:".noExl",
+		   name:"Worksheet Name",
+		   filename:"Activity Log",//do not include extension
+		 fileext:".xls" // file extension
+		
+		   });
+
+}
+
+
+
+</script>

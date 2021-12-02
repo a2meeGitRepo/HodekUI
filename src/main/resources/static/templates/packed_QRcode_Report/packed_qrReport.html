@@ -1,0 +1,174 @@
+	<script src="js/jquery.table2excel.js"></script>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> Report</h4>
+						 <!--  <ol class="breadcrumb float-right">
+                                  		<li class="breadcrumb-item active"><button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light" id="tooltip-touch" title="Add New Packing Box" ng-click="add()">Add New </button></li>
+                         </ol>
+                                -->   
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+		<!-- Add New Packing Box Start-->		
+
+			<div class="row top" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Packed QR code Report:</h4>
+
+									<form >
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> select Date: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3" >
+												<label class="control-form"> Operator Name: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3" >
+												<input type="date" ng-model="pckdReprt.forDate"  class="f_left form-control" >
+												<span ng-show="dateErr" style="color:red"> * Date is  Mandatory</span>
+													
+											</div>
+											
+											<div class="col-sm-3 col-xs-3">
+												 <select class="form-control"
+																			ng-model="pckdReprt.packed_by" id="user"
+																			ng-options="packed_by as packed_by.firstName+' '+packed_by.lastName for packed_by in users"
+																			style="height: calc(2.25rem + 14px)" >
+																			<option value="" disabled selected>Select User</option>
+																		</select>
+												<span ng-show="packedByErr" style="color:red"> * user is  Mandatory</span>
+												
+											</div>										
+												
+											
+											
+										</div>
+								
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3">
+												<button
+													class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-click="cancel()"> Cancel </button>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" 
+													ng-click="generate(pckdReprt)">
+													Generate </button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box End-->
+
+
+			<div class="row" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+							
+								<div class="card-box table-responsive">
+								<button class="btn btn-primary pull-right"  style="margin-bottom: 10px;"title="View "
+														onClick="exportTableToExcelPackingBox()" ><i class="mdi mdi-printer"></i></button>
+									<table   id="table2excel" class="table table-bordered"  datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<td>#</td>
+												<td> Packing Id</td>
+												<td>Component Name</td>
+												<td>Part No.</td>
+												<td> Packing Date</td>
+												<td> Packing Code</td>
+												<td>Packed By</td>
+												
+												
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="packedReport in reportsQr track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{packedReport.packing_id}} </td>
+												<td> {{packedReport.component_name}} </td>
+												<td> {{packedReport.component_code}} </td>
+												<td> {{packedReport.packing_date|date:'dd-MM-yyyy'}} </td>
+												<td> {{packedReport.packing_code}} </td>
+												<td> {{packedReport.fname}} {{packedReport.lname}} </td>
+												
+											
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</div>
+<script>
+
+
+
+function exportTableToExcelPackingBox(){
+	 $("#table2excel").table2excel({
+		
+		     // exclude CSS class
+		  exclude:".noExl",
+		   name:"Worksheet Name",
+		   filename:"Activity Log",//do not include extension
+		 fileext:".xls" // file extension
+		
+		   });
+
+}
+
+
+
+</script>

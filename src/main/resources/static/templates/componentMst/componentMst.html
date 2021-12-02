@@ -1,0 +1,319 @@
+<style type="text/css">
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.date1 {
+		border: 1px solid #c4c4c4;
+		border-radius: 5px;
+		padding: 3px 5px;
+		height: 38px;
+		box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+		background: #fff url(../../image/calendar_2.png) 97% 50% no-repeat;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	.ng-hide.ng-hide-animate{
+    	display: none !important;
+	}
+</style>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> Components</h4>
+						  <ol class="breadcrumb float-right">
+                                  		<li class="breadcrumb-item active"><button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light" id="tooltip-touch" title="Add New Packing Box" ng-click="add()">Add New </button></li>
+                         </ol>
+                                  
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+		<!-- Add New Packing Box Start-->		
+
+			<div class="row top" ng-show="addNewTab">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Add a new Components :</h4>
+
+									<form name="myForm">
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Part No: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Component Name: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Description: 
+											</div>
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="component.partNo" placeholder="Enter Part No"class="f_left form-control" >
+													<span ng-show="partNoErr" style="color:red"> * Part No is  Mandatory</span>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="component.componentName" placeholder="Enter Component Name" class="f_left form-control" >
+													<span ng-show="componentNameErr" style="color:red"> * Component Name is  Mandatory</span>
+											</div>
+											<div class="col-sm-6 col-xs-6">
+												<textarea type="text"
+													
+													ng-model="component.description" placeholder="Enter Description"  class="f_left form-control" ></textarea>
+													
+											</div>
+											
+										</div>
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Print Type: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> QR Type: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3" ng-if="component.qrType=='Variable'">
+												<label class="control-form"> Variable Type: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> QR Constant Data: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+											
+										</div>
+									<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3">
+												<select class="form-control f_left" ng-model="component.printType" >
+													<option value="" disabled selected>Select Print Type</option>
+													<option value="OnJob" >On Job Print</option>
+													<option value="Label" >Label Print</option>
+													
+												</select>
+												<span ng-show="printTypeErr" style="color:red"> * Print Type is  Mandatory</span>
+												
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<select class="form-control f_left" ng-model="component.qrType" >
+													<option value="" disabled selected>Select QR Type</option>
+													<option value="Variable" >Variable</option>
+													<option value="Fixed" >Fixed</option>
+													<option value="Custom Front" >Custom Front</option>
+													<option value="Custom Back" >Custom Back</option>
+													<option value="Custom Middle" >Custom Middle</option>
+												</select>
+												<span ng-show="qrTypeErr" style="color:red"> * QR Type is  Mandatory</span>
+											</div>
+												<div class="col-sm-3 col-xs-3" ng-if="component.qrType=='Variable'">
+												<select class="form-control f_left" ng-model="component.variableType" >
+													<option value="" disabled selected>Select Variable Type</option>
+													<!-- <option value="Date" >Date Wise</option> -->
+													<option value="Serial" >Serial No Wise</option>
+												</select>
+												<span ng-show="variableTypeErr" style="color:red"> * Variable  Type is  Mandatory</span>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<textarea type="component"
+													
+													ng-model="component.constantQrCode" placeholder="EnterConstant QR Code Data"  class="f_left form-control" ></textarea>
+													<span ng-show="contantqrErr" style="color:red"> * QR Code Data is  Mandatory</span>
+													
+											</div>
+											
+											
+											
+										</div>
+										
+										<div class="row" style="margin-top:2%">
+										<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Label Heading : <span
+														style="color:red;">*</span></label>
+											</div>
+											
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Label Heading  2: <span
+														style="color:red;">*</span></label>
+											</div>
+										<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Print Size: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Format: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+										</div>
+
+									<div class="row" style="margin-top:1%">
+									<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="component.labelHeading" placeholder="Enter Label Heading"  class="f_left form-control" >
+													
+											</div>
+											
+									<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="component.labelHeading2" placeholder="Enter Second Label Heading"  class="f_left form-control" >
+													
+											</div>		
+											
+									<div class="col-sm-3 col-xs-3">
+												<select class="form-control f_left" ng-model="component.printSize" required>
+													<option value="" disabled selected>Select Print Size</option>
+													<option value="12 x 50" >12 x 50</option>
+													<option value="12 x 50 cut" >12 x 50 cut</option>
+													<option value="25 x 50" >25 x 50</option>
+													<option value="18 x 50" >18 x 50</option>
+												</select>
+												<span ng-show="printSizeErr" style="color:red"> * Print Size is  Mandatory</span>
+												
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<select class="form-control f_left" ng-model="component.format" required>
+													<option value="" disabled selected>Select Format</option>
+													<option value="code 128" >Bar Code</option>
+													<option value="datamatrix" >Data Matrix</option>
+													<option value="25 x 50" >QR Code</option>
+												</select>
+												<span ng-show="formatErr" style="color:red"> * Format is  Mandatory</span>
+												
+											</div>
+											
+									</div>
+									
+									
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3">
+												<button
+													class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-click="cancelAdd()"> Cancel </button>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-hide="showBtn"
+													ng-click="save(component)">
+													Save </button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box End-->
+
+
+			<div class="row" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" id="tbl_grn" datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> Part No</th>
+												<th> Component Name</th>
+												<th> Print Type</th>
+												<th> QR Type</th>
+												<th> Added Date</th>
+												<th> Added By</th>
+												<th> Update Date Time</th>
+												<th> Status </th>
+												<th> Action </th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="arr in components track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.partNo}} </td>
+												<td> {{arr.componentName}} </td>
+												<td> {{arr.printType}} </td>
+												<td> {{arr.qrType}} </td>
+												<td> {{arr.addedDate|date:'dd-MM-yyyy'}} </td>
+												<td> {{arr.addedby}} </td>
+												<td> {{arr.updDatetime|date:'dd-MM-yyyy'}} </td>
+												<td>
+													<button class="btn btn-success" ng-show="arr.active==1"
+														>Active</button>
+													
+													<button class="btn btn-danger" ng-show="arr.active==0"
+														>InActive</button>
+												</td>
+												<td>
+												<button class="btn btn-primary" title="Change Status"
+														ng-click="edit(arr)">Edit</button>
+													
+												
+													<button class="btn btn-primary" title="Change Status"
+														ng-click="changeStatus(arr)"><i class=" mdi mdi-shuffle-variant"></i></button>
+													
+													<button class="btn btn-danger waves-effect waves-light" 
+																ng-click="deleteCom(arr);">Delete</button>	
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</div>

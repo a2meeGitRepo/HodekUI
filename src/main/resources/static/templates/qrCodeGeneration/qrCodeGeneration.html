@@ -1,0 +1,323 @@
+<style type="text/css">
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.date1 {
+		border: 1px solid #c4c4c4;
+		border-radius: 5px;
+		padding: 3px 5px;
+		height: 38px;
+		box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+		background: #fff url(../../image/calendar_2.png) 97% 50% no-repeat;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	.ng-hide.ng-hide-animate{
+    	display: none !important;
+	}
+</style>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> QR Code Geneation  </h4>
+						  <ol class="breadcrumb float-right">
+                                  		<li class="breadcrumb-item active"><button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light" id="tooltip-touch" title="Add New Packing Box" ng-click="add()">Add New </button></li>
+                         </ol>
+                                  
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+		<!-- Add New Packing Box Start-->		
+
+			<div class="row top" ng-show="addNewPackingBoxTab">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Generate New QR Code:</h4>
+
+									<form name="myForm">
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Component: <span
+														style="color:red;">*</span></label>
+											</div>
+												<div class="col-sm-3 col-xs-3" style="    margin-left: 188px;"ng-if="grCodeGenerator.componentMst.qrType=='Custom Front' ||grCodeGenerator.componentMst.qrType=='Custom Back' ||grCodeGenerator.componentMst.qrType=='Custom Middle'">
+												<label class="control-form"> QR Code Variant  : <span
+														style="color:red;">*</span></label>
+											</div>
+											
+											
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> No of QR Code: <span
+														style="color:red;">*</span></label>
+											</div>
+
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3">
+											   <select class="form-control"
+																			ng-model="grCodeGenerator.componentMst" id="businessUnit" ng-change="spitString(grCodeGenerator.componentMst)"
+																			ng-options="component as component.partNo+'  '+component.componentName for component in components"
+																			style="height: calc(2.25rem + 14px)" required>
+																			<option value="" disabled selected>Select Component</option>
+																		</select>
+											<span ng-show="componentErr" style="color:red"> * Component is  Mandatory</span>
+											</div>
+									
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Back'">
+											<span style="font-size: larger;">{{grCodeGenerator.componentMst.constantQrCode}}</span>
+												
+											</div>
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Back'">
+												<input type="text" style="    margin-left: -147px;"  maxlength="9"
+													
+													ng-model="grCodeGenerator.variant" placeholder="Enter Variant Data"class="f_left form-control" > 
+													<span ng-show="variantDataErr" style="color:red"> * Variant Data is  Mandatory</span>
+											</div>
+											
+											
+											
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Front'">
+												<input type="text"  maxlength="9"
+													
+													ng-model="grCodeGenerator.variant" placeholder="Enter Variant Data"class="f_left form-control" > 
+													<span ng-show="variantDataErr" style="color:red"> * Variant Data is  Mandatory</span>
+											</div>
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Front'">
+												<span style="margin-left: -13px;font-size: larger;">{{grCodeGenerator.componentMst.constantQrCode}}</span>
+											</div>
+											
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Middle'">
+												<span style=" ;font-size: larger;">{{string1}}</span>
+											</div>
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Middle'">
+												<input type="text"  maxlength="13" style="margin-left: -90px;"
+													
+													ng-model="grCodeGenerator.variant" placeholder="Enter Variant Data"class="f_left form-control" > 
+													<span ng-show="variantDataErr" style="color:red"> * Variant Data is  Mandatory</span>
+											</div>
+											<div class="col-sm-2 col-xs-2" ng-if="grCodeGenerator.componentMst.qrType=='Custom Middle'">
+												<span style="margin-left: -110px;font-size: larger;">{{string2}}</span>
+											</div>
+											<div class="col-sm-3 col-xs-3" >
+												<input type="number"
+													
+													ng-model="grCodeGenerator.qrCount" class="f_left form-control"  >
+													<span ng-show="qrCountErr" style="color:red"> * No .of QR Code  is  Mandatory</span>
+											</div>
+											
+										</div>
+									
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3">
+												<button
+													class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-click="cancelAdd()"> Cancel </button>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-hide="showBtn"
+													ng-click="save(grCodeGenerator)">
+													Save and Generate QR  </button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box End-->
+
+
+			<div class="row" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+						
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" id="tbl_grn" datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> Transaction No</th>
+												<th>Component</th>
+												<th> No of QR </th>
+												<th> Created By</th>
+												<th> Created Date</th>
+												<th> Created time</th>
+												
+												<th> Action </th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="arr in qrTransactions track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.transactionNo}} </td>
+												<td> {{arr.componentMst.partNo}} - {{arr.componentMst.componentName}}</td>
+												<td> {{arr.noQfQr}} </td>
+												<td> {{arr.transactionBy}}  </td>
+												<td>  {{arr.transactionDate|date:'dd-MM-yyyy'}} </td>
+												<td>  {{arr.transactionDate|date:'hh:mm a'}} </td>
+												
+												<td>
+													
+													<button class="btn btn-primary" title="View QR Codes"
+														ng-click="viewQR(arr)" ><i class="mdi mdi-qrcode-scan"></i></button>
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="row" ng-show="viewQRTabs" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+															
+						
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+								<h4 class="m-t-0 header-title"> QR Codes:</h4>
+								<!-- <div class="col-sm-3 col-xs-3 pull-right">
+												<select class="form-control f_left" ng-model="printSize" required>
+													<option value="" disabled selected>Select Print Size</option>
+													<option value="1" >12 x 50</option>
+													<option value="2" >25 x 50</option>
+													<option value="3" >18 x 50</option>
+													
+												</select>
+												<span ng-show="printSizeErr" style="color:red"> * Print Size is  Mandatory</span>
+												
+											</div> -->
+								<button class="btn btn-primary pull-right"  style="margin-bottom: 10px;"title="Print Qr Code "
+														ng-click="multiPrintCanvas()" ><i class="mdi mdi-printer"></i></button>
+								
+									<table class="table table-bordered" id="tbl_grn" 
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> Generated Shift</th>
+												<th>Generated  Date</th>
+												<th> Generated  By</th>
+												
+												<th> Bar Code</th>
+												<th>  <input class="c_check" type="checkbox"
+															ng-model="vm.selectAllChk"
+															ng-click="selectAllTable()"> 
+													</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="arr in qrCodes track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.generatedShift}} </td>
+												<td> {{arr.generatedDatetime|date:'dd-MM-yyyy'}} </td>
+												<td> {{arr.addedBy}}  {{arr.componentMst.format}}   {{arr.componentMst.print_size}} </td>
+<!-- 												<td>  <div ><qr id="anycanvas{{$index}}" text="arr.qrCode" correction-level="'L'" size="50" image="true" ></qr></div> </td>
+ --> 												
+												
+												<td  ng-if="arr.componentMst.format=='datamatrix' && arr.componentMst.print_size=='12 x 50 cut'&& arr.componentMst.qrType=='Fixed'" >
+												 
+														<div id="xxx" style="page-break-after: always;"
+															ng-init="config={ name : 'datamatrix', type : 'datamatrix', text : arr.qrCode, scale : { x : 3.5, y : 3.5 }, options : 'eclevel=M'}">
+															<td-barcode config="config" id="$index"></td-barcode>
+														</div>
+													
+												
+												</td>
+												<td  ng-if="arr.componentMst.format=='datamatrix' && arr.componentMst.print_size=='12 x 50 cut'&& arr.componentMst.qrType=='Variable'" >
+												 
+														<div id="xxx" style="page-break-after: always;"
+															ng-init="config={ name : 'datamatrix', type : 'datamatrix', text : arr.qrCode, scale : { x : 2.0, y : 2.0 }, options : 'eclevel=M'}">
+															<td-barcode config="config" id="$index"></td-barcode>
+														</div>
+													
+												
+												</td>
+												<td  ng-if="arr.componentMst.format=='datamatrix' && arr.componentMst.print_size!='12 x 50 cut'" >
+								 				
+														<div id="xxx" style="page-break-after: always;"
+													ng-init="config={ name : 'datamatrix', type : 'datamatrix', text : arr.qrCode, scale : { x : 5.5, y : 5.5 }, options : 'eclevel=M'}">
+													<td-barcode config="config" id="$index"></td-barcode>
+												</div>
+													
+												
+												</td>
+												<td  ng-if="arr.componentMst.format=='code 128'&& arr.componentMst.print_size=='25 x 50'" > 
+														 <div id="xxx" 
+													ng-init="config={ name : 'Code 128', type : 'code128', text : arr.qrCode, scale : { x : 4.5, y : 2.0}, options : 'eclevel=M'}">
+													<td-barcode config="config" id="$index"></td-barcode>
+												</div>
+												<td  ng-if="arr.componentMst.format=='code 128'&& arr.componentMst.print_size!='25 x 50' " > 
+														
+														
+														 <div id="xxx" 
+													ng-init="config={ name : 'Code 128', type : 'code128', text : arr.qrCode, scale : { x : 6.0, y : 2.0 }, options : 'eclevel=M'}">
+													<td-barcode config="config" id="$index"></td-barcode>
+												</div>
+												
+												<td><span ng-show="arr.printStatus==1">Printed</span>
+													<input class="c_check" type="checkbox" ng-checked="arr.check"   ng-show="!arr.printStatus==1"
+														ng-click="selectQR($index)">
+															
+													
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+		</div>
+	</div>
+</div>

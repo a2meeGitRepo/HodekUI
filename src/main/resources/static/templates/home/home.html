@@ -1,0 +1,221 @@
+<div class="content">
+                    
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <!-- start page title -->
+                        <div class="row" style="margin-top: 71px;
+    margin-left: 234px;">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                           
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">Dashboard</h4>
+                                </div>
+                            </div>
+                        </div>     
+                        <!-- end page title --> 
+
+                        <div class="row" ng-show="showDashboard" style="margin-right: -10px;
+  				  margin-left: 228px;">
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="card-box widget-box-two widget-two-custom" style="height: 92%">
+                                    <div class="media">
+                                        <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
+                                            <i class="mdi mdi-currency-usd avatar-title font-30 text-white"></i>
+                                        </div>
+
+                                        <div class="wigdet-two-content media-body">
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Total QR Code Generated</p>
+                                            <h2 class="font-weight-medium my-2"> <span data-plugin="counterup">{{dashboardData.totalQRGenerated}}</span></h2>
+                                        <p class="m-0"></p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="card-box widget-box-two widget-two-custom " style="height: 92%">
+                                    <div class="media">
+                                        <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
+                                            <i class="mdi mdi-account-multiple avatar-title font-30 text-white"></i>
+                                        </div>
+
+                                        <div class="wigdet-two-content media-body">
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Today QR Code Generated</p>
+                                            <h3 class="font-weight-medium my-2"> <span data-plugin="counterup">{{dashboardData.todayQRGenerated}}</span></h3>
+                                            <p class="m-0"></p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="card-box widget-box-two widget-two-custom " style="height: 92%">
+                                    <div class="media">
+                                        <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
+                                            <i class="mdi mdi-crown avatar-title font-30 text-white"></i>
+                                        </div>
+
+                                        <div class="wigdet-two-content media-body">
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Total QR Code Printed</p>
+                                            <h3 class="font-weight-medium my-2"><span data-plugin="counterup">{{dashboardData.totalQRPrinted}}</span></h3>
+                                           <p class="m-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="card-box widget-box-two widget-two-custom " style="height: 92%">
+                                    <div class="media">
+                                        <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
+                                            <i class="mdi mdi-auto-fix  avatar-title font-30 text-white"></i>
+                                        </div>
+
+                                        <div class="wigdet-two-content media-body">
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Today QR Code Printed</p>
+                                            <h3 class="font-weight-medium my-2"><span data-plugin="counterup">{{dashboardData.totalQRPrinted}}</span></h3>
+                                            <p class="m-0"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+    
+                        </div>
+                        
+                        
+                        
+                         <div class="row" ng-show="showDashboard"  style="margin-right: -10px;
+  				  margin-left: 228px;">
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="card-box widget-box-two widget-two-custom" style="height: 100%">
+                                    <div class="media">
+                                        <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
+                                            <i class="mdi mdi-currency-usd avatar-title font-30 text-white"></i>
+                                        </div>
+
+                                        <div class="wigdet-two-content media-body">
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Total Box Packed</p>
+                                            <h3 class="font-weight-medium my-2"> <span data-plugin="counterup">{{dashboardData.totalBoxPackeed}}</span></h3>
+                                           <p class="m-0"></p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end col -->
+
+                            <div class="col-xl-3 col-sm-6">
+                                <div class="card-box widget-box-two widget-two-custom " style="height: 100%">
+                                    <div class="media">
+                                        <div class="avatar-lg rounded-circle bg-primary widget-two-icon align-self-center">
+                                            <i class="mdi mdi-account-multiple avatar-title font-30 text-white"></i>
+                                        </div>
+
+                                        <div class="wigdet-two-content media-body">
+                                            <p class="m-0 text-uppercase font-weight-medium text-truncate" title="Statistics">Total Box InProcess</p>
+                                            <h3 class="font-weight-medium my-2"> <span data-plugin="counterup">{{dashboardData.totalBoxInProcess}}</span></h3>
+                                          <p class="m-0"></p> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- end col -->
+                            <div class="row"></div>
+    <!-- ------------------------------------------ select component ----------------------------------------------------------- -->     
+    
+    <!--------------------------------------------component packed data table count---------------------------------------------------- -->            
+              <div class="row"  style="margin-right: -10px;margin-left: 236px;"  ng-show="showDashboard" 
+  				  margin-left: 228px; margin-top:50px">
+				<div class="col-12">
+					<div class="page-title-box">					
+		 			<h3><b>Packed Component Details :</b> </h3>
+											
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" id="tbl_grn" datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> Component Name</th>
+												<th> Total Components Packed</th>
+												<th>Today's Total Components Packed</th>
+												
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="pckData in vm.packedData track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{pckData.compponent.componentName}} </td>
+												<td> {{pckData.total_packed_comp}} </td>
+												<td> {{pckData.todays_total_packed}} </td>										
+												
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+  <!-- ------------------------------------------component packed data table---------------------------------------------------- -->            
+  <!--------------------------------------------component QR code Data table count---------------------------------------------------- -->            
+              <div class="row"  style="margin-right: -10px;margin-left: 236px;"  ng-show="showDashboard" 
+  				  margin-left: 228px; margin-top:50px">
+				<div class="col-12">
+					<div class="page-title-box">					
+		 			<h3><b>Component QR-code Data table :</b> </h3>
+											
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" id="tbl_grn" datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th>Component Name</th>
+												<th>Total Packed Components QR codes</th>
+												<th>Today's Total Packed Components QR codes</th>
+												
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="pckQrData in  vm.packedQrData track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{pckQrData.compponent.componentName}} </td>
+												<td> {{pckQrData.total_packed_comp_qrCode}} </td>
+												<td> {{pckQrData.todays_total_comp_qrCode}} </td>										
+												
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+  <!-- ------------------------------------------component QR code Data table count---------------------------------------------------- -->            
+ 
+                   
+                </div>
+                </div>
+                

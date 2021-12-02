@@ -1,0 +1,373 @@
+<style type="text/css">
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.date1 {
+		border: 1px solid #c4c4c4;
+		border-radius: 5px;
+		padding: 3px 5px;
+		height: 38px;
+		box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+		background: #fff url(../../image/calendar_2.png) 97% 50% no-repeat;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	.ng-hide.ng-hide-animate{
+    	display: none !important;
+	}
+</style>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> PO and Batches</h4>
+						  <ol class="breadcrumb float-right">
+                                  		<li class="breadcrumb-item active"><button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light" id="tooltip-touch" title="Add New Packing Box" ng-click="add()">Add New </button></li>
+                         </ol>
+                                  
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+<!-- Add New Packing Box Start-->		
+
+			<div class="row top" ng-show=" addNewTab">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Add a new Batch :</h4>
+
+									<form name="myForm">
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> PO No: <span
+														style="color:red;">*</span></label>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> PO Date: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> PO Quantity: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Component: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="po.poNo" placeholder="Enter PO No"class="f_left form-control" >
+													<span ng-show="poNoErr" style="color:red"> * PO No is  Mandatory</span>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												<input type="date"
+													
+													ng-model="po.poDate" placeholder=" " class="f_left form-control" >
+													<span ng-show="poDateErr" style="color:red"> * PO Date is  Mandatory</span>
+											</div>
+											
+											
+											
+											<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="po.po_quantity" placeholder="Enter PO Quntity"class="f_left form-control" >
+													<span ng-show="poQuantErr" style="color:red"> * PO Quantity is  Mandatory</span>
+											</div>
+											
+											
+											<div class="col-sm-3 col-xs-3">
+												 <select class="form-control"
+																			ng-model="po.component" id="businessUnit"
+																			ng-options="component as component.partNo+''+component.componentName for component in components"
+																			style="height: calc(2.25rem + 14px)" required>
+																			<option value="" disabled selected>Select Component</option>
+																		</select>
+											<span ng-show="componentPoErr" style="color:red"> * Component is  Mandatory</span>
+													
+											</div>
+											
+											
+										</div>
+										
+								
+
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3">
+												<button
+													class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-click="cancelAdd()"> Cancel </button>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-hide="showBtn"
+													ng-click="save(po)">
+													Save </button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box END-->
+		<!-- Add New Packing Box Start-->		
+
+			<div class="row top" ng-show="addNewBatchTab">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Add a new Batch :</h4>
+
+									<form name="myForm">
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Batch  Name: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Batch  Quantity: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+											<div class="col-sm-3 col-xs-3">
+												<input type="text"
+													
+													ng-model="batch.batchName" placeholder="Enter Batch Name"class="f_left form-control" >
+													<span ng-show="batchNameErr" style="color:red"> * Batch Name is  Mandatory</span>
+											</div>
+											
+											
+											<div class="col-sm-4 col-xs-3">
+												<input type="number"
+													
+													ng-model="batch.batch_quant" placeholder="Enter Batch Quantity"class="f_left form-control" >
+													<span ng-show="batch_quantErr" style="color:red"> * Batch Quantity is  Mandatory</span>
+													<span ng-show="ValidQuant" style="color:blue">(Maximum Batch Quantity should be :<b>{{selPo.po_quantity-totalBatchQty}})</span><br>										
+													<span ng-show="overQuantErr" style="color:red">(Maximum Batch Quantity should be :<b>{{selPo.po_quantity-totalBatchQty}})</b></span>
+													<span ng-if="remBatchQty==0" style="color:red">Not Available</span>
+													
+											</div>
+											
+											
+											
+										</div>
+										
+								
+
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3">
+												<button
+													class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-click="cancelBatch()"> Cancel </button>
+											</div>
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-hide="showBtn"
+													ng-click="saveBatch(batch)">
+													Save </button>
+													
+													
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box END-->	
+			
+			<!-- BATCHRS LIST START-->
+
+
+			<div class="row"  ng-show="batchListTab">
+				<div class="col-12">
+					<div class="page-title-box">
+				
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+							
+								<div class="card-box table-responsive">
+							<button type="button" class="btn btn-primary btn-rounded  btn-sm w-md waves-effect waves-light" id="tooltip-touch" title="Add New Batch " ng-click="addBatch()">Add New Batch</button>
+								
+							<button type="button" class="btn btn-danger btn-rounded  btn-sm w-md waves-effect waves-light" id="tooltip-touch" title="Add New Batch " ng-click="closeBatch()">Close</button>
+								
+								
+									<table class="table table-bordered" id="tbl_grn" datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> Batch </th>
+													<th> Quantity </th>
+												<th> PO </th>
+												<th> Added By</th>
+												<th> Added Date</th>
+											
+											
+												<th> Status </th>
+												<th> Action </th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="arr in batches track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.batchName}} </td>
+												<td> {{arr.batch_quant}} </td>
+												<td> {{arr.po.poNo}} </td>
+										
+												<td> {{arr.createdBy}} </td>
+												<td> {{arr.createdDate|date:'dd-MM-yyyy'}} </td>
+												<td>
+													<button class="btn btn-success" ng-show="arr.active==1"
+														>Active</button>
+													
+													<button class="btn btn-danger" ng-show="arr.active==0"
+														>InActive</button>
+												</td>
+												<td>
+													<button class="btn btn-primary" title="Change Status"
+														ng-click="changeStatusBatch(arr)"><i class="  mdi mdi-shuffle"></i></button>
+															
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			
+			
+			
+			
+						<!-- BATCHRS LIST END-->
+			
+			
+			
+			
+			
+
+
+
+			<div class="row" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+									<table class="table table-bordered" id="tbl_grn" datatable="ng"
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> PO No</th>
+												<th> Quantity</th>
+												<th> PO Date</th>
+												<th> Added By</th>
+												<th> Added Date</th>
+											
+											
+												<th> Status </th>
+												<th> Action </th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="arr in pos track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.poNo}} </td>
+												<td> {{arr.po_quantity}} </td>
+												<td> {{arr.poDate|date:'dd-MM-yyyy'}} </td>
+												<td> {{arr.createdBy}} </td>
+												<td> {{arr.createdDate|date:'dd-MM-yyyy'}} </td>
+												<td>
+													<button class="btn btn-success" ng-show="arr.active==1"
+														>Active</button>
+													
+													<button class="btn btn-danger" ng-show="arr.active==0"
+														>InActive</button>
+												</td>
+												<td>
+													<button class="btn btn-primary" title="Change Status"
+														ng-click="changeStatus(arr)"><i class="  mdi mdi-shuffle"></i></button>
+															<button class="btn btn-primary" title="View Batches"
+														ng-click="viewBatches(arr)"><i class="  mdi mdi-eye"></i></button>
+													
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</div>

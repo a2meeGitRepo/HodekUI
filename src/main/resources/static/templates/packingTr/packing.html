@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!--animated-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
+    <!--icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="templates/packingTr/css/style.css">
+    <style type="text/css">
+    
+    /*2D block*/
+.bgblue{
+    background-color: #2d3e50;
+}
+.bg-green{
+    background-color: #86bc42;
+}
+.border-bottom-effect{
+	border-bottom :4px solid #64c5b1;
+	padding: 12px;
+}
+.box{
+    position: relative;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50% , -11%) skewY(0deg);
+    width: auto;
+    height: auto;
+    box-shadow: -10px 5px 30px rgba(0,0,0,0.5);
+    box-sizing: border-box;
+    transition: .5s;
+}
+.box:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 25px;
+    height: 100%;
+    background: #e0e0e0;
+    transform-origin: right bottom;
+    transform: skewY(45deg);
+}
+.box:after{
+    content: '';
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 100%;
+    height:25px;
+    background: #efefef;
+    transform-origin: bottom left;
+    transform: skewX(45deg);
+}
+  
+    
+    
+    </style>
+</head>
+<body>
+<div class="page-title-box">
+
+	<div class="row" style="margin-top: 85px;
+							    margin-left: 248px;
+							    margin-right: 10px;
+							">
+								<button
+													class="btn btn-danger btn-rounded w-md waves-effect waves-light"
+													style=" margin-bottom:10px;  margin-left: 20px" 
+													ng-click="back()">
+													Back </button>
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Packing  :{{selPacking.packingCode}}</h4>
+
+									<form name="myForm">
+									
+									
+									
+									
+									
+									
+									
+									<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Packing Transaction NO:      {{packing.packingCode}}</label>
+											</div>
+											
+											<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Packing Component:         {{packing.componentMst.partNo}} - {{packing.componentMst.componentName}}</label>
+											</div>
+											
+										</div>
+									
+									
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Component: <span
+														style="color:red;">*</span></label>
+											</div>
+											
+										</div>
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-6 col-xs-6">
+									    		<input type="text"  ng-disabled="disableScan" id="qrcodetab"
+													
+													ng-model="qrCode" class="f_left form-control" autofocus ng-change="checkQRCode(qrCode)"  >
+											</div>	
+										</div>
+									
+									
+									</form>
+								</div>
+							</div>
+							
+							
+							
+							
+							
+								<div class="col-md-12" ng-show="boxQrTab">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Print Box QR Code
+
+									<form name="myForm">
+										
+										<div class="row" style="margin-top:2%">
+										<div class="col-sm-4 col-xs-4"></div>
+											<div class="col-sm-6 col-xs-6">
+									    		<qr id="anycanvas" text="boxQrCode" correction-level="'L'" size="120" image="true" ></qr>
+											</div>
+												<div class="col-sm-6 col-xs-6" ng-show="false">
+									    		<qr id="anycanvas1" text="boxQrCode" correction-level="'L'" size="300" image="true" ></qr>
+											</div>
+										</div>
+									
+										<div class="row" style="margin-top:2%">
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+											<div class="col-sm-3 col-xs-3"></div>
+										
+											<div class="col-sm-3 col-xs-3">
+												
+												<button
+													class="btn btn-success btn-rounded w-md waves-effect waves-light"
+													style="width:100%;" ng-hide="showBtn"
+													ng-click="printCode()">
+													Print </button>
+											</div>
+										</div> 
+									</form>
+								</div>
+							</div>
+							
+							
+							
+							
+							
+		</div>
+</div>
+<!--2D block-->
+<div class="container my-5 py-5"  >
+    <div class="row my-5 py-5"></div>
+  </div>
+  
+  <div class="container mt-5">
+  
+    <div class="box" style="margin-top: -40px;">
+   
+ 		<div class="row text-white px-3 border-bottom-effect" ng-repeat="  layer in layers">
+ 		
+          <div class="col-sm-2 col-md-2 col-lg-2 col-xm-2 mt-2 " ng-repeat="  cell in layer">
+              <div  ng-class="cell.packedStatus=='Packed'?'card  bg-green' : 'card  bgblue'" style="border-radius:10px">
+                <div class="card-body py-5"></div>
+              </div>	
+          </div>
+     
+    </div>
+    </div>
+  </div>
+  
+    
+</body>
+</html>

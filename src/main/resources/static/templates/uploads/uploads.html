@@ -1,0 +1,309 @@
+<style>
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.input1 {
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		border: 2px solid #ccc !important;
+		border-radius: 4px !important;
+		font-size: 12px !important;
+		-webkit-transition: width 0.4s ease-in-out !important;
+		transition: width 0.4s ease-in-out !important;
+	}
+
+	.reading{
+		border: 0px !important;
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		text-align: center !important;
+		font-size: 12px !important;
+	}
+	
+	.reading:focus{
+		border: 0px !important;
+		width: 120px !important;
+		line-height: 30px !important;
+		box-sizing: border-box !important;
+		text-align: center !important;
+		font-size: 12px !important;
+	}
+
+	.input1:focus,
+	.date1:focus {
+		width: 120px !important;
+		line-height: 30px !important;
+		border: 2.5px solid #ccc !important;
+		border-radius: 4px !important;
+
+	}
+
+	.date1 {
+		width: 120px !important;
+		line-height: 30px !important;
+		font-size: 12px !important;
+		border: 2px solid #ccc !important;
+		border-radius: 4px !important;
+		-webkit-transition: width 0.4s ease-in-out !important;
+		transition: width 0.4s ease-in-out !important;
+		background: #fff url(image/calendar_2.png) 97% 50% no-repeat !important;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	th,
+	td {
+		white-space: nowrap;
+	}
+</style>
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> File Uploads </h4>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+			<!-- start add  row -->
+			<div class="row top">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title">Component Master Upload:</h4>
+									<div class="row">
+										<div class="col-sm-2 col-xs-2">
+											<label class="control-form" style="padding-top: 9px;"> Select Excel File:
+												<span style="color:red;">*</span></label>
+										</div>
+										<div class="col-sm-4 col-xs-4">
+											<input type="file" id="uploadComponent" file-model="myFile" ng-model="uploadComponent"
+												onchange="angular.element(this).scope().enable()" class="form-control"
+												ng-required="true" />
+										</div>
+										<div class="col-sm-2 col-xs-4">
+											<button class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+												style="width:100%;" ng-click="vm.uploadComponent();"> Upload </button>
+										</div>
+<!-- 										<a href="assets/Project status-Hodek.xlsx">Download here</a>
+ -->										<div class="col-sm-2 col-xs-4">
+											<a href="assets/uploadExcelFile/FG Tracebility_ Component.xlsx" class="btn btn-warning btn-rounded w-md waves-effect waves-light"
+												style="width:100%;" ><i class="mdi mdi-file-download
+												"></i> Download Format </a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" ng-show="false">
+									<table class="destination_table2" id="tbl_grn">
+										    <thead>
+										        <th style="border:1px solid black;padding:2px">Sr No</th>
+										        <th style="border:1px solid black;padding:2px">Part No</th>
+										        <th style="border:1px solid black;padding:2px">Component name</th>
+										         <th style="border:1px solid black;padding:2px">Description</th>
+										        <th style="border:1px solid black;padding:2px">Print Type</th>
+										         <th style="border:1px solid black;padding:2px">QR Type</th>
+										          <th style="border:1px solid black;padding:2px">QR Code</th>
+										    </thead>
+										    <tbody>
+										    
+										    <tr></tr>
+										    <tr></tr>
+										    <tr></tr>
+										    <tr></tr>
+										    <tr></tr>
+										    <tr></tr>
+										    <tr></tr>
+										    
+										    
+										    </tbody>
+										   
+										</table>
+						
+						
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+
+									<h4 class="m-t-0 header-title">Packing Box Master Upload:</h4>
+									<div class="row">
+										<div class="col-sm-2 col-xs-2">
+											<label class="control-form" style="padding-top: 9px;"> Select XLX File:
+												<span style="color:red;">*</span></label>
+										</div>
+										<div class="col-sm-4 col-xs-4">
+											<input type="file" id="filePackingBox" file-model="myFile" ng-model="filePackingBox"
+												onchange="angular.element(this).scope().enable()" class="form-control"
+												ng-required="true" />
+										</div>
+										<div class="col-sm-2 col-xs-4">
+											<button class="btn btn-primary btn-rounded w-md waves-effect waves-light"
+												style="width:100%;" ng-click="vm.uploadPacking();"> Upload </button>
+										</div>
+										<div class="col-sm-2 col-xs-4">
+											<a href="assets/uploadExcelFile/FG Tracebility_PackingBox.xlsx" class="btn btn-warning btn-rounded w-md waves-effect waves-light"
+												style="width:100%;" ><i class="mdi mdi-file-download
+												"></i> Download Format </a>
+										</div>
+										
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="row" ng-show="false">
+									<table  class="destination_table1"id="tbl_box">
+										    <tr>
+										        <th style="border:1px solid black;padding:2px">Sr No</th>
+										        <th style="border:1px solid black;padding:2px">Box Name</th>
+										        <th style="border:1px solid black;padding:2px">Item per Box</th>
+										         <th style="border:1px solid black;padding:2px">layer Per Box</th>
+										     
+										    </tr>
+										   
+										</table>
+						
+						
+						</div>
+					</div>
+				</div>
+			</div>
+
+	
+
+		</div>
+	</div>
+</div>
+<script>
+
+function exportTableToExcel(){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById('tbl_grn');
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = "Component"+'.xlsx';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+
+function exportTableToExcelPackingBox(){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById('tbl_box');
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = "PackingBox"+'.xlsx';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+</script>
+	<script src="js/jquery.table2excel.js"></script>
+
+<script> 
+$("#btn_export_to_excel").click(function()
+		   {
+		     //alert("aaa");
+		      var conf = confirm("Export Student Data to XLS/CSV?");
+		               if(conf == true)
+		               {
+		                        $(".destination_table1").table2excel({
+		                   exclude: ".action",
+		                   name: "Packing",
+		                   filename: "Packing",
+		                   fileext: ".xlsx",
+		                   exclude_img: true,
+		                   exclude_links: true,
+		                   exclude_inputs: true
+		                 });
+		               }
+		     
+		   });
+$("#btn_export_to_excel_com").click(function()
+		   {
+		     //alert("aaa");
+		      var conf = confirm("Export Student Data to XLS/CSV?");
+		               if(conf == true)
+		               {
+		                        $(".destination_table2").table2excel({
+		                   exclude: ".action",
+		                   name: "Component222223",
+		                   filename: "Component333.xlsx",
+		                   fileext: ".xlsx",
+		                   exclude_img: true,
+		                   exclude_links: true,
+		                   exclude_inputs: true
+		                 });
+		               }
+		     
+		   });
+</script>

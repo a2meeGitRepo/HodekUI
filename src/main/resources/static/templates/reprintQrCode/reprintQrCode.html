@@ -1,0 +1,166 @@
+<style type="text/css">
+	input:focus {
+		border: 1px solid grey !important;
+	}
+
+	.date1 {
+		border: 1px solid #c4c4c4;
+		border-radius: 5px;
+		padding: 3px 5px;
+		height: 38px;
+		box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+		background: #fff url(../../image/calendar_2.png) 97% 50% no-repeat;
+	}
+
+	.date1::-webkit-inner-spin-button {
+		display: none;
+	}
+
+	.date1::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	}
+
+	.ng-hide.ng-hide-animate{
+    	display: none !important;
+	}
+</style>
+
+<div class="content-page">
+	<!-- Start content -->
+	<div class="content">
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title float-left"> QR Code Reprint </h4>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+		<!-- Add New Packing Box Start-->		
+
+			<div class="row top" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card-box">
+									<h4 class="m-t-0 header-title"> Reprint QR Code:</h4>
+
+									<form name="myForm">
+										<div class="row" style="margin-top:2%">
+									    	<div class="col-sm-3 col-xs-3">
+												<label class="control-form"> Transaction No: <span
+														style="color:red;">*</span></label>
+											</div>
+	
+									    	
+										</div>
+
+										<div class="row" style="margin-top:1%">
+											
+										
+									
+										
+											<div class="col-sm-3 col-xs-3" >
+												<input type="text"
+													
+													ng-model="transactionNo" class="f_left form-control"  >
+													
+											</div>
+											<div class="col-sm-3 col-xs-3" >
+												<button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light" id="tooltip-touch" title="Get QR Code" ng-click="loadQrCodeByTransactionNo(transactionNo)">Get QR Codes</button>
+											</div>
+										</div>
+									
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+<!-- Add New Packing Box End-->
+
+
+		\
+
+
+			<div class="row" ng-show="viewQRTabs" >
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="row">
+															
+						
+							<div class="col-sm-12 col-xs-12">
+								<div class="card-box table-responsive">
+								<h4 class="m-t-0 header-title"> QR Codes:</h4>
+							<!-- 	<div class="col-sm-3 col-xs-3 pull-right">
+												<select class="form-control f_left" ng-model="printSize" required>
+													<option value="" disabled selected>Select Print Size</option>
+													<option value="1" >12 x 50</option>
+													<option value="2" >25 x 50</option>
+													<option value="3" >18 x 50</option>
+													
+												</select>
+												<span ng-show="printSizeErr" style="color:red"> * Print Size is  Mandatory</span>
+												
+											</div> -->
+								<button class="btn btn-primary pull-right"  style="margin-bottom: 10px;"title="Print Qr Code "
+														ng-click="print()" ><i class="mdi mdi-printer"></i></button>
+								
+									<table class="table table-bordered" id="tbl_grn" 
+										dt-column-defs="dtColumnDefs" dt-options="dtOptions">
+										<thead>
+											<tr class="customTable">
+												<th>#</th>
+												<th> Generated Shift</th>
+												<th>Generated  Date</th>
+												<th> Generated  </th>
+												<th> Packing Box Size</th>
+												
+												<th> <input class="c_check" type="checkbox"
+															ng-model="vm.selectAllChk"
+															ng-click="selectAllTable()">
+													</th>
+											</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-if="qrCodes.length==1"><td colspan=5>No Data Found</td>
+											<tr ng-repeat="arr in qrCodes track by $index">
+												<td> {{$index + 1}} </td>
+												<td> {{arr.generatedShift}} </td>
+												<td> {{arr.generatedDatetime|date:'dd-MM-yyyy'}} </td>
+												<td> {{arr.generatedBy}} </td>
+												<td>  <div ><qr id="anycanvas{{$index}}" text="arr.qrCode" correction-level="'L'" size="80" image="true" ></qr></div> </td>
+												<td>
+													<input class="c_check" type="checkbox" ng-checked="arr.check"   
+														ng-click="selectQR($index)">
+													
+												</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,53 @@
+<html>
+	<head>
+	
+	<!-- Load fonts: Needed for bwip -->
+	<script type="text/javascript">
+		// Adapt your paths!
+		var Module = {
+			memoryInitializerPrefixURL : 'node_modules/bwip-js/',
+			preRun : [ function() {
+				Module.FS_createPreloadedFile("/", "Inconsolata.otf",
+						"node_modules/bwip-js/Inconsolata.otf", true, false);
+			} ],
+			postRun : [ function() {
+				var load_font = Module.cwrap("load_font", 'number', [ 'string',
+						'string', 'number' ]);
+				load_font("Inconsolata.otf", "INCONSOLATA", 108);
+			} ]
+		};
+	</script>
+	<link rel="stylesheet"
+		href="assets/css/angular-material.min.css">
+	<script src="bower_components/angular/angular.min.js"></script>
+<!-- ********* DATA MATRIX ********** -->
+<script src="bwip-js/freetype.js"></script>
+<script src="bwip-js/bwip.js"></script>
+<script src="bwip-js/lib/canvas.js"></script>
+<script src="td-angular-barcode/dist/td-barcode.js"></script>
+<!-- ********* DATA MATRIX ********** -->
+
+
+	
+	
+	
+	
+	
+	</head>
+	<body>
+
+	<div id ="test">
+	</div>
+	
+<div  id="anycanvas{{$index}}" style="page-break-after: always;width:75%;">
+												<td-barcode config="{ name : 'Code 128', type : 'datamatrix', text : 'Datta', scale : { x : 2, y : 1.5 }, options : ''}" id={{$index}}></td-barcode>
+											</div>
+	
+	
+	
+	
+	
+	</body>
+
+
+</html>
